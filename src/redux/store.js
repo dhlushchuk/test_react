@@ -4,9 +4,9 @@ import reducer from './reducer'
 const initialState = {
     userState: {},
     userLoginState: {},
-    isShowedSidebar: false,
-    isPageOnload: false,
-    backgroundTheme: ""
+    showSidebar: false,
+    loadPage: false,
+    changeBackgroundTheme: ""
 }
 const Store = createStore(reducer,
     (localStorage['redux-store']) ?
