@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { addUser } from '../redux/actions'
 import { withRouter } from 'react-router'
 import './registration.css'
 
@@ -25,7 +23,7 @@ const Registration = (props, {store}) => {
         if(validateEmail(user.email) && validateBirthday()) {
             user.registrationDate = new Date()
             user.signIn = "true"
-            store.dispatch(addUser(user))
+            props.addUser(user)
             props.history.push(`/page`)
         }
         else {
@@ -62,9 +60,6 @@ const Registration = (props, {store}) => {
             </form>
         </div>
     );
-}
-Registration.contextTypes = {
-    store: PropTypes.object
 }
 
 export default withRouter(Registration)

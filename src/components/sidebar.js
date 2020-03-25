@@ -1,10 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { addUser } from '../redux/actions'
 import Palette from './palette'
 import { Link } from 'react-router-dom'
 
-const Sidebar = (props, { store }) => {
+const Sidebar = (props) => {
     const user = JSON.parse(localStorage.getItem('redux-store'))
     const checkAuthorization = () => {
         if(user !== null && user.userState !== null && user.userState.signIn === "true") {
@@ -16,12 +16,12 @@ const Sidebar = (props, { store }) => {
     }
     return (
         <div>
-        <div className={(store.getState().showSidebar) ? "sidebar sidebar-show" : "sidebar"}>     
+        <div className={props.showSidebar ? "sidebar sidebar-show" : "sidebar"}>     
             <ul>
                 <Link to='/' className='links'>
                     <li>На главную</li>
                 </Link>
-                <Link to={checkAuthorization} className={(store.getState().loadPage) ? "links signification-hide" : "links signification"}>
+                <Link to={checkAuthorization} className={props.loadPage ? "links signification-hide" : "links signification"}>
                     <li>Войти</li>
                 </Link>
                 <Link to='/registration' className='links'>
@@ -38,20 +38,27 @@ const Sidebar = (props, { store }) => {
                 </Link>
                 <Link to='/' onClick={() => { 
                         user.userState.signIn = "false" 
-                        store.dispatch(addUser(user.userState))
-                    }} className={(store.getState().loadPage) ? "links logout-show" : "links logout"}>
+                        props.addUser(user.userState)
+                    }} className={props.loadPage ? "links logout-show" : "links logout"}>
                     <li>Выйти</li>
                 </Link>
             </ul>
-            <div className={(store.getState().loadPage) ? "palette-show" : "palette-hide"}>
+            <div className={props.loadPage ? "palette-show" : "palette-hide"}>
                 <Palette changeColor={props.changeColor}/>
             </div>
         </div>
         </div>
     );
 }
-Sidebar.contextTypes = {
-    store: PropTypes.object
-}
 
-export default Sidebar
+export default connect(
+    state => ({
+        showSidebar: state.showSidebar,
+        loadPage: state.loadPage
+    }),
+    dispatch => ({
+        addUser(user) {
+            dispatch(addUser(user))
+        }
+    })
+)(Sidebar)
