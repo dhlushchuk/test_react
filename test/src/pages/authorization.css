@@ -1,0 +1,114 @@
+.authorization-main h2 {
+    padding: 10px 10px 20px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 35px;
+}
+.authorization-main form {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    width: 400px;
+    padding: 30px;
+    margin: 10% auto;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+}
+.authorization-main form a {
+    color: gray;
+}
+.authorization-main form a:hover {
+    border-bottom: 1px solid gray;
+}
+.authorization-main form h2 {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 40px;
+    color: black;
+}
+.error {
+    background-color: rgb(255, 235, 230);
+    border: 1px solid red;
+    padding: 5px 15px;  
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    visibility: hidden;
+}
+.error-message-show {
+    visibility: visible;
+}
+.inputs-log:focus {
+    border: 1px solid black;
+}
+.inputs-log {
+    height: 50px;
+    width: 100%;
+    padding-left: 15px; 
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 1em;  
+    outline: none;
+    box-shadow: none;
+}
+#button-login {
+    font-size: 1.7em;
+    padding: 5px 9px; 
+    margin-top: 20px;
+    border: 1px solid rgb(169, 169, 169);
+    border-radius: 2px;
+    outline: none;
+    color: white;
+    background-color: rgb(0, 156, 255);
+}
+#button-login:hover {
+    background-color: rgb(0, 180, 255);
+    cursor: pointer;
+}
+#button-login:active { 
+    -moz-transform: translatey(2px);
+    -ms-transform: translatey(2px);
+    -webkit-transform: translatey(2px);
+    -o-transform:translatey(2px); 
+    transform: translatey(2px); 
+}
+#button-login:focus {
+    outline: none;
+}
+@media all and (min-width: 481px) and (max-width:768px) {
+    .authorization-main form {
+        max-width: 100%;
+    }
+    .authorization-main form h2 {  
+        font-size: 30px;
+        color: black;
+        text-shadow: none;
+    }
+}
+@media all and (max-width:480px) {
+    .authorization-main form {
+        max-width: 100%;
+        align-items: stretch;
+    }
+    .authorization-main form h2 {  
+        font-size: 20px;
+        color: black;
+        text-shadow: none;
+        width: 90%;
+    }
+    #error-message-show {
+        font-size: 12px;
+        width: 90%;
+        text-align: left;
+    }
+    .inputs-log {
+        font-size: 1em;
+        width: 90%;
+    }
+    #button-login {
+        width: 90%;
+        font-size: 1.4em;
+        padding: 2px 3px; 
+        margin-left: 0;
+    }
+}
