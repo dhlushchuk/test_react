@@ -3,7 +3,6 @@ import './page.css'
 import { connect } from 'react-redux'
 import { addUser, userAuthorization, loadPage } from '../redux/actions'
 
-const user = JSON.parse(localStorage.getItem('redux-store'))
 const useBeforeFirstRender = (f) => {
     const [hasRendered, setHasRendered] = useState(false)
     useEffect(() => setHasRendered(true), [hasRendered])
@@ -13,6 +12,7 @@ const useBeforeFirstRender = (f) => {
 }
 
 const Page = (props) => {
+    const user = JSON.parse(localStorage.getItem('redux-store'))
     useBeforeFirstRender(() => {
         props.userAuthorization({userFirstName: props.userState.lastname, userLastName: props.userState.username})
     })

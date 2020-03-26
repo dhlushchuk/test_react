@@ -1,14 +1,11 @@
 import React from 'react'
 import { withRouter } from 'react-router'
+import validator from 'validator'
 import './registration.css'
 
-const Registration = (props, {store}) => {
+const Registration = (props) => {
     let error
     let user = {email: "", username: "", lastname: "", bday: "День", bmonth: 'Месяц', byear: "Год", password: "", registrationDate: "", signIn: "false", background: "default"}
-    const validateEmail = (email) => {
-        let pattern  = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return pattern.test(email);
-    }
     const validateBirthday = () => {
         if(user.bday !== "День" && user.bmonth !== "Месяц" && user.byear !== "Год") {
             return true
@@ -20,7 +17,7 @@ const Registration = (props, {store}) => {
         user[name] = e.target.value
     }
     const onSubmit = (e) => {
-        if(validateEmail(user.email) && validateBirthday()) {
+        if(validator.isEmail(user.email) && validateBirthday()) {
             user.registrationDate = new Date()
             user.signIn = "true"
             props.addUser(user)
