@@ -24,7 +24,7 @@ const Sidebar = (props) => {
                 <Link to={checkAuthorization} className={props.loadPage ? "links signification-hide" : "links signification"}>
                     <li>Войти</li>
                 </Link>
-                <Link to='/registration' className='links'>
+                <Link to='/registration' className={props.loadPage ? "links signification-hide" : "links signification"}>
                     <li>Регистрация</li>
                 </Link>
                 <Link to='/' className='links'>

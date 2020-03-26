@@ -6,7 +6,7 @@ const initialState = {
     userLoginState: {},
     showSidebar: false,
     loadPage: false,
-    changeBackgroundTheme: ""
+    changeBackgroundTheme: "rgb(237, 238, 240)"
 }
 const Store = createStore(reducer,
     (localStorage['redux-store']) ?

@@ -13,7 +13,6 @@ import Page from './pages/page'
 
 import './App.css'
 
-const user = JSON.parse(localStorage.getItem('redux-store'))
 const useBeforeFirstRender = (f) => {
   const [hasRendered, setHasRendered] = useState(false)
   useEffect(() => setHasRendered(true), [hasRendered])
@@ -23,6 +22,7 @@ const useBeforeFirstRender = (f) => {
 }
 
 const App = (props) => {
+  const user = JSON.parse(localStorage.getItem('redux-store'))
   useBeforeFirstRender(() => {
     document.body.style.backgroundColor = props.checkChangeBackgroundTheme
   })
