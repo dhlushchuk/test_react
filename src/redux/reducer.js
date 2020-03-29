@@ -1,10 +1,9 @@
 import { combineReducers }  from 'redux'
-import { userState, userLoginState, showSidebar, loadPage, changeBackgroundTheme } from './reducers'
+import { userState, showSidebar, loadPage,backgroundTheme } from './reducers'
 
 export default combineReducers({ 
     userState, 
-    userLoginState, 
     showSidebar, 
     loadPage, 
-    changeBackgroundTheme 
+    backgroundTheme 
 })

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from 'react-router'
 import './authorization.css'
 
@@ -6,6 +6,9 @@ const Authorization = (props) => {
     let error
     const user = JSON.parse(localStorage.getItem('redux-store'))
     let userLog = {email: "", password: ""}
+    useEffect(() => {
+        props.checkLoadPage(false)
+    },[props])
     const onChange = (e) => {
         let name = e.target.name
         userLog[name] = e.target.value

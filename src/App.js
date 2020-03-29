@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Header from './components/header'
 import Footer from './components/footer'
 import Sidebar from './components/sidebar'
-import { addUser, showSidebar, loadPage, changeBackgroundTheme } from './redux/actions'
+import { addUser, showSidebar, loadPage, backgroundTheme } from './redux/actions'
 
 import MainPage from './pages/main-page'
 import { AppRegistration, AppAuthorization } from './components/containers'
@@ -13,34 +13,36 @@ import Page from './pages/page'
 
 import './App.css'
 
-const useBeforeFirstRender = (f) => {
-  const [hasRendered, setHasRendered] = useState(false)
-  useEffect(() => setHasRendered(true), [hasRendered])
-  if (!hasRendered) {
-    f()
-  }
-}
-
 const App = (props) => {
-  const user = JSON.parse(localStorage.getItem('redux-store'))
+  const [pageState, setPageState] = useState(false)
+  const checkLoadPage = useCallback((bool) => {
+    setPageState(bool)
+    props.loadPage(pageState)
+  }, [props, pageState])
+  const useBeforeFirstRender = (f) => {
+    const [hasRendered, setHasRendered] = useState(false)
+    useEffect(() => setHasRendered(true), [hasRendered])
+    if (!hasRendered) {
+      f()
+    }
+  }
   useBeforeFirstRender(() => {
-    document.body.style.backgroundColor = props.checkChangeBackgroundTheme
+    document.body.style.backgroundColor = props.checkBackgroundTheme
   })
+  const changeColor = useCallback((e) => {
+    document.body.style.backgroundColor = `${e.target.style.backgroundColor}`
+    props.backgroundTheme(`${e.target.style.backgroundColor}`)
+  }, [props])
   return (
     <div>
       <Header showLeftSidebar = {() => {props.showSidebar ? props.showLeftSidebar(false) : props.showLeftSidebar(true)}}/>
       <Router>
-        <Sidebar changeColor={(e) => {
-          document.body.style.backgroundColor = `${e.target.style.backgroundColor}`
-          props.changeBackgroundTheme(`${e.target.style.backgroundColor}`)
-          user.userState.background = `${e.target.style.backgroundColor}`
-          props.addUser(user.userState)
-        }} />
+        <Sidebar changeColor={changeColor} />
         <Switch>
-          <Route exact path="/" render={() => <MainPage mainPageOnload = {() => props.loadPage(false)} />} />
-          <Route exact path="/registration" component={AppRegistration} />
-          <Route exact path="/authorization" component={AppAuthorization} />
-          <Route exact path="/page" render={() => <Page pageOnload = {() => props.loadPage(true)} />} />
+          <Route exact path="/" render={() => <MainPage checkLoadPage={checkLoadPage}/>} />
+          <Route exact path="/registration" render={() => <AppRegistration checkLoadPage={checkLoadPage}/>} />
+          <Route exact path="/authorization" render={() => <AppAuthorization checkLoadPage={checkLoadPage}/>} />
+          <Route exact path="/page" render={() => <Page checkLoadPage={checkLoadPage}/>} />
         </Switch>
       </Router>
       <Footer />
@@ -51,14 +53,14 @@ const App = (props) => {
 export default connect(
   state => ({
     showSidebar: state.showSidebar,
-    checkChangeBackgroundTheme: state.changeBackgroundTheme
+    checkBackgroundTheme: state.backgroundTheme
   }),
   dispatch => ({
     showLeftSidebar(bool) {
       dispatch(showSidebar(bool))
     },
-    changeBackgroundTheme(color) {
-      dispatch(changeBackgroundTheme(color))
+    backgroundTheme(color) {
+      dispatch(backgroundTheme(color))
     },
     addUser(user) {
       dispatch(addUser(user))

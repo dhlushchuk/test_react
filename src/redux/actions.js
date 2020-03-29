@@ -1,23 +1,19 @@
 export const addUser = (user) => ({
     type: "ADD_USER",
-    user
+    payload: user
 })
-export const userAuthorization = (user) => ({
-    type: "CHECK_USER_AUTHORIZATION",
-    user
-})
-export const showSidebar = (isShowedSidebar) =>
+export const showSidebar = (bool) =>
 ({
     type: "SHOW_SIDEBAR",
-    isShowedSidebar
+    payload: bool
 })
-export const loadPage = (isPageOnload) =>
+export const loadPage = (bool) =>
 ({
     type: "LOAD_PAGE",
-    isPageOnload
+    payload: bool
 })
-export const changeBackgroundTheme = (backgroundTheme) => 
+export const backgroundTheme = (color) => 
 ({
     type: "CHANGE_BACKGROUND_COLOR",
-    backgroundTheme
+    payload: color
 })

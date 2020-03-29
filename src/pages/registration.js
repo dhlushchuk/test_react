@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from 'react-router'
 import validator from 'validator'
 import './registration.css'
 
 const Registration = (props) => {
     let error
-    let user = {email: "", username: "", lastname: "", bday: "День", bmonth: 'Месяц', byear: "Год", password: "", registrationDate: "", signIn: "false", background: "default"}
+    let user = {email: "", username: "", lastname: "", bday: "День", bmonth: 'Месяц', byear: "Год", password: "", registrationDate: "", signIn: "false"}
+    useEffect(() => {
+        props.checkLoadPage(false)
+    },[props])
     const validateBirthday = () => {
         if(user.bday !== "День" && user.bmonth !== "Месяц" && user.byear !== "Год") {
             return true
