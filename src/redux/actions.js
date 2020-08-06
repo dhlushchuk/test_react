@@ -1,19 +1,21 @@
+import { ADD_USER, SHOW_SIDEBAR, LOAD_PAGE, CHANGE_BACKGROUND_COLOR } from "./constants"
+
 export const addUser = (user) => ({
-    type: "ADD_USER",
+    type: ADD_USER,
     payload: user
 })
 export const showSidebar = (bool) =>
 ({
-    type: "SHOW_SIDEBAR",
+    type: SHOW_SIDEBAR,
     payload: bool
 })
 export const loadPage = (bool) =>
 ({
-    type: "LOAD_PAGE",
+    type: LOAD_PAGE,
     payload: bool
 })
 export const backgroundTheme = (color) => 
 ({
-    type: "CHANGE_BACKGROUND_COLOR",
+    type: CHANGE_BACKGROUND_COLOR,
     payload: color
 })

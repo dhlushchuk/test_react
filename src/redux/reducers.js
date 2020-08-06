@@ -1,6 +1,8 @@
+import { ADD_USER, SHOW_SIDEBAR, LOAD_PAGE, CHANGE_BACKGROUND_COLOR } from "./constants"
+
 export const userState = (state = {}, action) => {
     switch (action.type) {
-    case "ADD_USER" :
+    case ADD_USER :
         return action.payload 
     default:
         return state
@@ -8,7 +10,7 @@ export const userState = (state = {}, action) => {
 }
 export const showSidebar = (state = false, action) => {
     switch (action.type) {
-    case "SHOW_SIDEBAR" :
+    case SHOW_SIDEBAR :
         return  action.payload  
     default:
         return state
@@ -16,7 +18,7 @@ export const showSidebar = (state = false, action) => {
 }
 export const loadPage = (state = false, action) => {
     switch (action.type) {
-    case "LOAD_PAGE" :
+    case LOAD_PAGE :
         return action.payload 
     default:
         return state
@@ -24,7 +26,7 @@ export const loadPage = (state = false, action) => {
 }
 export const backgroundTheme = (state = "rgb(237, 238, 240)", action) => {
     switch (action.type) {
-    case "CHANGE_BACKGROUND_COLOR" :
+    case CHANGE_BACKGROUND_COLOR :
         return  action.payload 
     default:
         return state

@@ -1,0 +1,4 @@
+export const ADD_USER = "ADD_USER"
+export const SHOW_SIDEBAR = "SHOW_SIDEBAR"
+export const LOAD_PAGE = "LOAD_PAGE"
+export const CHANGE_BACKGROUND_COLOR = "CHANGE_BACKGROUND_COLOR"
